@@ -20,13 +20,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { TableFiestasComponent } from './components/table-fiestas/table-fiestas.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FiestasService } from './services/fiestas.service';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ShellComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    TableFiestasComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +53,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FiestasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
