@@ -12,8 +12,7 @@ import { FiestaNombres } from '../../models/fiestas.model';
 export class TableFiestasComponent implements OnInit {
 
   dataSource = new FiestaNombresDataSource(this.fiestasService);
-  //displayedColumns = ['nombreGrupo'];
-  displayedColumns = ['id', 'zona', 'fecha', 'nombreGrupo', 'nombreTipo', 'localidad'];
+  displayedColumns = ['zona', 'fecha', 'nombreGrupo', 'nombreTipo', 'localidad'];
 
   constructor(private fiestasService: FiestasService) { }
 
@@ -29,8 +28,6 @@ export class FiestaNombresDataSource extends DataSource<any>{
   }
 
   connect(): Observable<FiestaNombres[]>{
-    console.log('obs');
-    console.log(this.fiestaService.getFiestasNombres());
     return this.fiestaService.getFiestasNombres();
   }
 
