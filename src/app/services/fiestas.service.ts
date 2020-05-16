@@ -16,15 +16,15 @@ export class FiestasService {
 
     public getFiesta(): Observable<FiestaNombres>{
     this.url = environment.url_api + 'Fiesta/obtenerFiestasSimple';
-    console.log(this.url);
-    //let datos = this.http.get<FiestaNombres>(this.url);
-    //console.log(datos);
+    // console.log(this.url);
+    // let datos = this.http.get<FiestaNombres>(this.url);
+    // console.log(datos);
     return this.http.get<FiestaNombres>(this.url);
   }
 
   getFiestasNombres(): Observable<FiestaNombres[]>{
     this.url = environment.url_api + 'Fiesta/obtenerFiestasSimple';
-    console.log(this.url);
+    // console.log(this.url);
     return this.http.get<FiestaNombres[]>(this.url);
   }
 

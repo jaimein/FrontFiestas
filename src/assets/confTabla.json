@@ -1,0 +1,49 @@
+{
+    "configuracion": "json",
+    "fiestas": {
+        "type": "FiestaNombres",
+        "servicio": "FiestasService",
+        "metodo": "getFiestasNombres",
+        "displayedColumns": [
+            "fecha",
+            "nombreGrupo",
+            "nombreTipo",
+            "localidad",
+            "zona"
+        ],
+        "columnas": [
+            { "id": "id", "nombre": "id Fiesta", "isDate": "no" },
+            { "id": "fecha", "nombre": "Fecha", "isDate": "si" },
+            { "id": "nombreGrupo", "nombre": "Grupo", "isDate": "no" },
+            { "id": "nombreTipo", "nombre": "Tipo", "isDate": "no" },
+            { "id": "localidad", "nombre": "Localidad", "isDate": "no" },
+            { "id": "zona", "nombre": "Calle", "isDate": "no" }
+        ]
+    },
+    "grupos": {
+        "type": "GrupoBasico",
+        "servicio": "GruposService",
+        "metodo": "getGruposBasico",
+        "displayedColumns": [
+            "id",
+            "descripcion"
+        ],
+        "columnas": [
+            { "id": "id", "nombre": "id Grupo", "isDate": "no" },
+            { "id": "descripcion", "nombre": "Nombre", "isDate": "no" }
+        ]
+    },
+    "tipos": {
+        "type": "TipoBasico",
+        "servicio": "TiposService",
+        "metodo": "getTiposBasico",
+        "displayedColumns": [
+            "id",
+            "descripcion"
+        ],
+        "columnas": [
+            { "id": "id", "nombre": "id Tipo", "isDate": "no" },
+            { "id": "descripcion", "nombre": "Nombre", "isDate": "no" }
+        ]
+    }
+}

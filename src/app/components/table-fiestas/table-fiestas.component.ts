@@ -6,6 +6,9 @@ import { FiestaNombres } from '../../models/fiestas.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import infoTabla from '../../../assets/confTabla.json';
+import { GruposService } from '../../services/grupos.service';
+import { TiposService } from '../../services/tipos.service';
 
 @Component({
   selector: 'app-table-fiestas',
@@ -13,23 +16,49 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./table-fiestas.component.css'],
 })
 export class TableFiestasComponent implements OnInit {
-  dataSource = new MatTableDataSource<FiestaNombres>();
-  displayedColumns = [
+  slug = 'tipos';
+  tabla = infoTabla;
+  arrayespe = this.tabla[this.slug];
+  /*displayedColumns = [
     'fecha',
     'nombreGrupo',
     'nombreTipo',
     'localidad',
     'zona',
-  ];
+  ];*/
+  displayedColumns = this.arrayespe.displayedColumns ;
+  columnas = this.arrayespe.columnas;
+  dataSource = new MatTableDataSource<any>();
+
+
+var: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<FiestaNombres>;
+  @ViewChild(MatTable) table: MatTable<any>;
 
-  constructor(private fiestasService: FiestasService) {}
+  constructor(private fiestasService: FiestasService, private gruposService: GruposService, private tiposService: TiposService) {
+    const service = obtenerServicios(this.slug);
+    console.log(this.columnas);
+    console.log(this.arrayespe);
+
+  }
+
 
   ngOnInit(): void {
-    this.fiestasService.getFiestasNombres().subscribe(things => {
+    switch (this.slug) {
+      case 'fiestas': console.log(this.slug);
+                      this.var = this.fiestasService.getFiestasNombres();
+                      break;
+      case 'grupos': console.log(this.slug);
+                     this.var = this.gruposService.getGruposBasico();
+                     break;
+      case 'tipos': console.log(this.slug);
+                    this.var = this.tiposService.getTiposBasico();
+                    break;
+  }
+
+    this.var.subscribe(things => {
       this.dataSource.data = things;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -37,5 +66,20 @@ export class TableFiestasComponent implements OnInit {
 
   }
 
+
+
 }
 
+function obtenerServicios(titulo: string) {
+  switch (titulo) {
+    case 'fiestas': console.log(titulo);
+                    return FiestasService;
+                    break;
+    case 'prueba': console.log(titulo);
+                   return FiestasService;
+                   break;
+    case 'tres': console.log(titulo);
+                 return FiestasService;
+                 break;
+}
+}
