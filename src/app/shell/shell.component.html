@@ -2,14 +2,19 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
-            <a mat-list-item [routerLink]="['/']">Home</a>
+            <a mat-list-item [routerLink]="['/']">
+                <mat-icon>home</mat-icon> Inicio</a>
             <!-- <a mat-list-item [routerLink]="['/fiestas']">Fiestas</a> -->
-            <a mat-list-item [routerLink]="['/tabla/fiestas']">Fiestas</a>
-            <a mat-list-item [routerLink]="['/tabla/grupos']">Grupos</a>
-            <a mat-list-item [routerLink]="['/tabla/tipos']">Tipos</a>
+            <a mat-list-item [routerLink]="['/tabla/fiestas']">
+                <mat-icon> list_alt</mat-icon> Fiestas</a>
+            <a mat-list-item [routerLink]="['/tabla/grupos']">
+                <mat-icon> list_alt</mat-icon> Grupos</a>
+            <a mat-list-item [routerLink]="['/tabla/tipos']">
+                <mat-icon> list_alt</mat-icon> Tipos</a>
 
 
-            <a mat-list-item [routerLink]="['/contact']">Contacto</a>
+            <a mat-list-item [routerLink]="['/contact']">
+                <mat-icon>contact_support</mat-icon> Contacto</a>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -18,8 +23,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
             <span>{{ nombreApp }}</span>
-            <div class="btnlogin">
-                <a mat-raised-button routerLink="./login">Login</a>
+            <div>
+                <a mat-raised-button class="btnlogin" routerLink="./registro">Registro</a>
+                <a mat-raised-button class="btnlogin" routerLink="./login">Login</a>
             </div>
         </mat-toolbar>
         <!-- Add Content Here -->

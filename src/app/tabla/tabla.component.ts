@@ -75,5 +75,16 @@ export class TablaComponent implements OnInit {
     });
   }
 
+  public redirectToDetails = (id: string) => {
+
+  }
+
+  public redirectToUpdate = (id: string) => {
+
+  }
+
+  public redirectToDelete = (id: string) => {
+
+  }
 
 }

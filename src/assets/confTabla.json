@@ -9,7 +9,7 @@
             "nombreGrupo",
             "nombreTipo",
             "localidad",
-            "zona"
+            "zona", "details"
         ],
         "columnas": [
             { "id": "id", "nombre": "id Fiesta", "isDate": "no" },
@@ -25,8 +25,7 @@
         "servicio": "GruposService",
         "metodo": "getGruposBasico",
         "displayedColumns": [
-            "id",
-            "descripcion"
+            "descripcion", "details"
         ],
         "columnas": [
             { "id": "id", "nombre": "id", "isDate": "no" },
@@ -38,7 +37,6 @@
         "servicio": "TiposService",
         "metodo": "getTiposBasico",
         "displayedColumns": [
-            "id",
             "descripcion"
         ],
         "columnas": [
