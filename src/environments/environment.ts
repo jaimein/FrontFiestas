@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  url_api: 'https://localhost:44337/api/',
-  // url_api: 'https://192.168.0.254:5000/api/',
+  // url_api: 'https://localhost:44337/api/',
+   url_api: 'https://192.168.0.254:5000/api/',
   nombreApp: 'Página web de fiestas y/o eventos'
 };
 

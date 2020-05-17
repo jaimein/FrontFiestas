@@ -29,7 +29,7 @@
             "descripcion"
         ],
         "columnas": [
-            { "id": "id", "nombre": "id Grupo", "isDate": "no" },
+            { "id": "id", "nombre": "id", "isDate": "no" },
             { "id": "descripcion", "nombre": "Nombre", "isDate": "no" }
         ]
     },
@@ -42,7 +42,7 @@
             "descripcion"
         ],
         "columnas": [
-            { "id": "id", "nombre": "id Tipo", "isDate": "no" },
+            { "id": "id", "nombre": "id", "isDate": "no" },
             { "id": "descripcion", "nombre": "Nombre", "isDate": "no" }
         ]
     }

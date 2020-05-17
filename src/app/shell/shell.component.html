@@ -3,7 +3,12 @@
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
             <a mat-list-item [routerLink]="['/']">Home</a>
-            <a mat-list-item [routerLink]="['/fiestas']">Fiestas</a>
+            <!-- <a mat-list-item [routerLink]="['/fiestas']">Fiestas</a> -->
+            <a mat-list-item [routerLink]="['/tabla/fiestas']">Fiestas</a>
+            <a mat-list-item [routerLink]="['/tabla/grupos']">Grupos</a>
+            <a mat-list-item [routerLink]="['/tabla/tipos']">Tipos</a>
+
+
             <a mat-list-item [routerLink]="['/contact']">Contacto</a>
         </mat-nav-list>
     </mat-sidenav>
@@ -13,6 +18,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
             <span>{{ nombreApp }}</span>
+            <div class="btnlogin">
+                <a mat-raised-button routerLink="./login">Login</a>
+            </div>
         </mat-toolbar>
         <!-- Add Content Here -->
         <router-outlet></router-outlet>

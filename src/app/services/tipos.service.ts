@@ -14,7 +14,7 @@ export class TiposService {
   constructor(private http: HttpClient) { }
 
   getTiposBasico(): Observable<TipoBasico[]>{
-    this.url = environment.url_api + 'Grupo/obtenerGruposBasico';
+    this.url = environment.url_api + 'Tipos/obtenerTiposBasico';
     return this.http.get<TipoBasico[]>(this.url);
   }
 }

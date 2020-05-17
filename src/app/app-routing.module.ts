@@ -18,6 +18,7 @@ const routes: Routes = [
     path: 'fiestas',
     component: TableFiestasComponent
   },
+  { path: 'tabla', loadChildren: () => import('./tabla/tabla.module').then(m => m.TablaModule) },
 ];
 
 @NgModule({

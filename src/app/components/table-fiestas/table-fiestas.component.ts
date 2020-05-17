@@ -16,9 +16,9 @@ import { TiposService } from '../../services/tipos.service';
   styleUrls: ['./table-fiestas.component.css'],
 })
 export class TableFiestasComponent implements OnInit {
-  slug = 'tipos';
+  dato = 'fiestas';
   tabla = infoTabla;
-  arrayespe = this.tabla[this.slug];
+  arrayespe = this.tabla[this.dato];
   /*displayedColumns = [
     'fecha',
     'nombreGrupo',
@@ -38,7 +38,7 @@ var: any;
   @ViewChild(MatTable) table: MatTable<any>;
 
   constructor(private fiestasService: FiestasService, private gruposService: GruposService, private tiposService: TiposService) {
-    const service = obtenerServicios(this.slug);
+    const service = obtenerServicios(this.dato);
     console.log(this.columnas);
     console.log(this.arrayespe);
 
@@ -46,14 +46,14 @@ var: any;
 
 
   ngOnInit(): void {
-    switch (this.slug) {
-      case 'fiestas': console.log(this.slug);
+    switch (this.dato) {
+      case 'fiestas': console.log(this.dato);
                       this.var = this.fiestasService.getFiestasNombres();
                       break;
-      case 'grupos': console.log(this.slug);
+      case 'grupos': console.log(this.dato);
                      this.var = this.gruposService.getGruposBasico();
                      break;
-      case 'tipos': console.log(this.slug);
+      case 'tipos': console.log(this.dato);
                     this.var = this.tiposService.getTiposBasico();
                     break;
   }
