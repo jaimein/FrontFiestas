@@ -9,6 +9,7 @@ import { GruposService } from '../services/grupos.service';
 import { TiposService } from '../services/tipos.service';
 import infoTabla from '../../assets/confTabla.json';
 import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/app-auth/authentication.service';
 
 @Component({
   selector: 'app-tabla',
@@ -24,6 +25,8 @@ export class TablaComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   var: any;
   route: ActivatedRoute;
+  // auth: AuthenticationService;
+  login = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
@@ -32,7 +35,8 @@ export class TablaComponent implements OnInit {
     route: ActivatedRoute,
     private fiestasService: FiestasService,
     private gruposService: GruposService,
-    private tiposService: TiposService
+    private tiposService: TiposService,
+    private auth: AuthenticationService
   ) {
     this.route = route;
     console.log('constructor');
@@ -40,6 +44,13 @@ export class TablaComponent implements OnInit {
   }
   ngOnInit(): void {
     console.log('init');
+    this.auth.currentUser.subscribe(arg => {if (arg) {
+      //console.log('login');
+      this.login = true;
+    } else {
+      this.login = false;
+      //console.log('nooooo');
+    }});
 
     this.route.params.subscribe((params) => {
       this.dato = params.dato;

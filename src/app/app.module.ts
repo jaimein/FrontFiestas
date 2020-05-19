@@ -26,10 +26,12 @@ import { MatSortModule } from '@angular/material/sort';
 import { TableFiestasComponent } from './components/table-fiestas/table-fiestas.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FiestasService } from './services/fiestas.service';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-
+import { LoginComponent } from './components/login/login.component';
+import { errorInterceptorProvider } from './app-auth/errors.interceptor';
+import { jwtInterceptorProvider } from './app-auth/jwt.interceptor';
 
 registerLocaleData(localeEs, 'es');
 
@@ -39,7 +41,8 @@ registerLocaleData(localeEs, 'es');
     ShellComponent,
     HomeComponent,
     ContactComponent,
-    TableFiestasComponent
+    TableFiestasComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,9 +64,10 @@ registerLocaleData(localeEs, 'es');
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule,
   ],
-  providers: [FiestasService, { provide: LOCALE_ID, useValue: 'es' }],
-  bootstrap: [AppComponent]
+  providers: [FiestasService, { provide: LOCALE_ID, useValue: 'es' }, errorInterceptorProvider,    jwtInterceptorProvider,],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

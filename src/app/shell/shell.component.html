@@ -23,10 +23,14 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
             <span>{{ nombreApp }}</span>
-            <div>
+            <div *ngIf="login==false; else loginok">
                 <a mat-raised-button class="btnlogin" routerLink="./registro">Registro</a>
                 <a mat-raised-button class="btnlogin" routerLink="./login">Login</a>
             </div>
+            <ng-template #loginok>
+                <a mat-raised-button class="btnlogin" (click)="logout()">Logout</a>
+
+            </ng-template>
         </mat-toolbar>
         <!-- Add Content Here -->
         <router-outlet></router-outlet>

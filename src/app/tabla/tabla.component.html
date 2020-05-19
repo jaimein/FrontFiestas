@@ -17,19 +17,21 @@
         <ng-container matColumnDef="details">
             <mat-header-cell *matHeaderCellDef class="iconos">
                 <span>Details</span>
-                <span>update</span>
-                <span>delete</span>
+                <span *ngIf="login">update</span>
+                <span *ngIf="login">delete</span>
             </mat-header-cell>
             <mat-cell *matCellDef="let elemento" class="iconos">
                 <button mat-icon-button color="primary" (click)="redirectToDetails(elemento.id)">
           <mat-icon class="mat-18">reorder</mat-icon>
         </button>
-                <button mat-icon-button color="accent" (click)="redirectToDetails(elemento.id)">
+
+                <button mat-icon-button color="accent" *ngIf="login" (click)="redirectToDetails(elemento.id)">
           <mat-icon class="mat-18">system_update</mat-icon>
         </button>
-                <button mat-icon-button color="warn" (click)="redirectToDetails(elemento.id)">
+                <button mat-icon-button color="warn" *ngIf="login" (click)="redirectToDetails(elemento.id)">
           <mat-icon class="mat-18">delete</mat-icon>
         </button>
+
             </mat-cell>
         </ng-container>
         <!--         <ng-container matColumnDef="update">
