@@ -1,0 +1,15 @@
+mat-form-field {
+    width: 400px;
+}
+
+mat-card-title {
+    text-align: center;
+}
+
+.exteriorLogin {
+    width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
