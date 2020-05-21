@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatNativeDateModule } from '@angular/material/core';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-
+    NgxMaterialTimepickerModule
   ]
 })
 export class AddModule { }

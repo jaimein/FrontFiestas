@@ -13,7 +13,13 @@
                         <mat-datepicker #pickerfecha></mat-datepicker>
                     </mat-form-field>
                 </div>
-
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Hora del evento</mat-label>
+                        <input matInput id="appt-time" type="time" name="appt-time" [ngxTimepicker]="fullTime" [format]="24">
+                        <ngx-material-timepicker #fullTime></ngx-material-timepicker>
+                    </mat-form-field>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
