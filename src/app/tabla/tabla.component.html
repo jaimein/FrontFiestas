@@ -53,5 +53,10 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20, 30]" [pageSize]="10" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 30]" [pageSize]="20" showFirstLastButtons></mat-paginator>
+</div>
+<div class="botonAddctn">
+    <button mat-fab class="buttonAdd" color="warn" (click)="create()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

@@ -8,7 +8,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { GruposService } from '../services/grupos.service';
 import { TiposService } from '../services/tipos.service';
 import infoTabla from '../../assets/confTabla.json';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/app-auth/authentication.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class TablaComponent implements OnInit {
   columnas = null;
   dataSource = new MatTableDataSource<any>();
   var: any;
-  route: ActivatedRoute;
+  routeActive: ActivatedRoute;
   // auth: AuthenticationService;
   login = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -32,27 +32,28 @@ export class TablaComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
 
   constructor(
-    route: ActivatedRoute,
+    routeActive: ActivatedRoute,
     private fiestasService: FiestasService,
     private gruposService: GruposService,
     private tiposService: TiposService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private router: Router
   ) {
-    this.route = route;
+    this.routeActive = routeActive;
     console.log('constructor');
 
   }
   ngOnInit(): void {
     console.log('init');
     this.auth.currentUser.subscribe(arg => {if (arg) {
-      //console.log('login');
+      // console.log('login');
       this.login = true;
     } else {
       this.login = false;
-      //console.log('nooooo');
+      // console.log('nooooo');
     }});
 
-    this.route.params.subscribe((params) => {
+    this.routeActive.params.subscribe((params) => {
       this.dato = params.dato;
       this.cargar(this.dato);
     });
@@ -87,7 +88,8 @@ export class TablaComponent implements OnInit {
   }
 
   public redirectToDetails = (id: string) => {
-
+    const url = `/details/${id}`;
+    this.router.navigate([url]);
   }
 
   public redirectToUpdate = (id: string) => {
@@ -96,6 +98,12 @@ export class TablaComponent implements OnInit {
 
   public redirectToDelete = (id: string) => {
 
+  }
+
+  public create(){
+    const url = `/crear/${this.dato}`;
+
+    this.router.navigate([url]);
   }
 
 }

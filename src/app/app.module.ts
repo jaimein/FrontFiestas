@@ -32,6 +32,7 @@ import localeEs from '@angular/common/locales/es';
 import { LoginComponent } from './components/login/login.component';
 import { errorInterceptorProvider } from './app-auth/errors.interceptor';
 import { jwtInterceptorProvider } from './app-auth/jwt.interceptor';
+import { DetailsComponent } from './components/details/details.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -43,6 +44,7 @@ registerLocaleData(localeEs, 'es');
     ContactComponent,
     TableFiestasComponent,
     LoginComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

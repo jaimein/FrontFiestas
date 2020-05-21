@@ -15,3 +15,10 @@ export interface Fiestatotal {
   localidad: string;
   zona: string;
 }
+
+export interface FiestaCreacion {
+  fecha: Date;
+  id_grupo: number;
+  id_tipo: number;
+  id_codigo_postal: number;
+}

@@ -1,0 +1,95 @@
+<form [formGroup]="AddForm" (ngSubmit)="onSubmit()">
+    <mat-card class="form-card">
+        <mat-card-header>
+            <mat-card-title>Añadir fiesta</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Fecha del evento</mat-label>
+                        <input matInput [matDatepicker]="pickerfecha" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="pickerfecha"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerfecha></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Grupo</mat-label>
+                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlGroup" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="getDescription">
+                            <mat-option *ngFor="let option of filteredGroup | async" [value]="option">
+                                {{option.descripcion}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tipo</mat-label>
+                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlTipo" [matAutocomplete]="autoTipos">
+                        <mat-autocomplete #autoTipos="matAutocomplete" autoActiveFirstOption [displayWith]="getDescription">
+                            <mat-option *ngFor="let optionTipo of filteredTipos | async" [value]="optionTipo">
+                                {{optionTipo.descripcion}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Comunidad</mat-label>
+                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlComunidad" [matAutocomplete]="autoComunidad">
+                        <mat-autocomplete #autoComunidad="matAutocomplete" autoActiveFirstOption [displayWith]="getNombre">
+                            <mat-option *ngFor="let optionComunidad of filteredComunidad | async" (onSelectionChange)="cargarProvincias(optionComunidad)" [value]="optionComunidad">
+                                {{optionComunidad.nombre}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="col" *ngIf="mostrarProvincia">
+                    <mat-form-field class="full-width">
+                        <mat-label>Provincia</mat-label>
+                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlProvincia" [matAutocomplete]="autoProvincia">
+                        <mat-autocomplete #autoProvincia="matAutocomplete" autoActiveFirstOption [displayWith]="getNombre">
+                            <mat-option *ngFor="let optionProvincia of filteredProvincia | async" (onSelectionChange)="cargarPoblaciones(optionProvincia)" [value]="optionProvincia">
+                                {{optionProvincia.nombre}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="col" *ngIf="mostrarPoblacion">
+                    <mat-form-field class="full-width">
+                        <mat-label>Poblacion</mat-label>
+                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlPoblacion" [matAutocomplete]="autoPoblacion">
+                        <mat-autocomplete #autoPoblacion="matAutocomplete" autoActiveFirstOption [displayWith]="getNombre">
+                            <mat-option *ngFor="let optionPoblacion of filteredPoblacion | async" (onSelectionChange)="cargarCP(optionPoblacion)" [value]="optionPoblacion">
+                                {{optionPoblacion.nombre}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="col" *ngIf="mostrarcp">
+                    <mat-form-field class="full-width">
+                        <mat-label>Codigo Postal</mat-label>
+                        <input matInput type="text" placeholder="Selecione uno" [formControl]="Controlcp" [matAutocomplete]="autocp">
+                        <mat-autocomplete #autocp="matAutocomplete" autoActiveFirstOption [displayWith]="getCalle">
+                            <mat-option *ngFor="let optioncp of filteredcp | async" [value]="optioncp">
+                                {{optioncp.calle}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="warn" type="submit">Clear</button>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

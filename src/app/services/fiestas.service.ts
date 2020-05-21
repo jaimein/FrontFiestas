@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { FiestaNombres } from '../models/fiestas.model';
 
 @Injectable({
@@ -28,7 +28,14 @@ export class FiestasService {
     return this.http.get<FiestaNombres[]>(this.url);
   }
 
+  getFiestaNombre(num: number){
+    this.url = environment.url_api + 'Fiesta/obtenerFiestaSimple';
+    console.log(this.url);
+    let params = new HttpParams();
+    params = params.append('id', num.toString());
 
+    return this.http.get<FiestaNombres>(this.url, {params});
+  }
 
   getFiestasNombresback(): Observable<FiestaNombres[]>{
     this.url = environment.url_api + 'Fiesta/obtenerFiestasSimple';

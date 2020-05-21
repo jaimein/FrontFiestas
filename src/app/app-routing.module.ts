@@ -6,6 +6,7 @@ import { TableFiestasComponent } from './components/table-fiestas/table-fiestas.
 import { TablaComponent } from './tabla/tabla.component';
 import { AuthGuard } from './app-auth/auth.guard';
 import { LoginComponent } from './components/login/login.component';
+import { DetailsComponent } from './components/details/details.component';
 
 
 const routes: Routes = [
@@ -20,24 +21,19 @@ const routes: Routes = [
   {
     path: 'fiestas',
     component: TableFiestasComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'login',
     component: LoginComponent
   },
-  { path: 'tabla', loadChildren: () => import('./tabla/tabla.module').then(m => m.TablaModule) }
-/*   ,
-{
-  path: 'admin',
-  component: TablaComponent,
-  canActivate: [AuthGuard],
-  children: [{
-    path: 'fiestas',
-    component: TablaComponent,
-  }
-]
-},*/
+  {
+    path: 'details',
+    component: DetailsComponent
+  },
+  { path: 'tabla', loadChildren: () => import('./tabla/tabla.module').then(m => m.TablaModule) },
+  { path: 'add', loadChildren: () => import('./add/add.module').then(m => m.AddModule) }
+
 ];
 
 @NgModule({
