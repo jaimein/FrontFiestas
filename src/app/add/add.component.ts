@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
 import { GrupoBasico } from '../models/grupo.model';
 import { GruposService } from '../services/grupos.service';
 import { TiposService } from '../services/tipos.service';
 import { AuthenticationService } from '../app-auth/authentication.service';
 import { ActivatedRoute } from '@angular/router';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, subscribeOn } from 'rxjs/operators';
 import { TipoBasico } from '../models/tipo.model';
 import { UbicacionService } from '../services/ubicacion.service';
 import { comunidadesBasico, provinciaBasico, poblacionBasico, cpBasico } from '../models/ubicacion.model';
+import { FiestasService } from '../services/fiestas.service';
 
 @Component({
   selector: 'app-add',
@@ -17,21 +18,31 @@ import { comunidadesBasico, provinciaBasico, poblacionBasico, cpBasico } from '.
   styleUrls: ['./add.component.css'],
 })
 export class AddComponent {
-  ControlGroup = new FormControl();
-  ControlTipo = new FormControl();
-  ControlComunidad = new FormControl();
-  ControlProvincia = new FormControl();
-  ControlPoblacion = new FormControl();
-  Controlcp = new FormControl();
+  AddForm: FormGroup;
+
+  FiestaForm = new FormGroup({
+    ControlFecha: new FormControl(''),
+    ControlHora: new FormControl(''),
+    ControlGroup: new FormControl(''),
+    ControlTipo: new FormControl(''),
+    ControlComunidad: new FormControl(''),
+    ControlProvincia: new FormControl(''),
+    ControlPoblacion: new FormControl(''),
+    ControlCp: new FormControl(''),
+  });
+  // ControlGroup = new FormControl();
+  // ControlTipo = new FormControl();
+  // ControlComunidad = new FormControl();
+  // ControlProvincia = new FormControl();
+  // ControlPoblacion = new FormControl();
+  // Controlcp = new FormControl();
 
   filteredGroup = new Observable<GrupoBasico[]>();
   date = new FormControl(new Date());
   serializedDate = new FormControl(new Date().toISOString());
   hasUnitNumber: any;
   routeActive: ActivatedRoute;
-  AddForm = this.fb.group({
-    date: null,
-  });
+
   grupos: Observable<GrupoBasico[]>;
   gruposArr: GrupoBasico[];
   filteredTipos: Observable<TipoBasico[]>;
@@ -39,6 +50,7 @@ export class AddComponent {
   filteredProvincia: Observable<provinciaBasico[]>;
   filteredPoblacion: Observable<poblacionBasico[]>;
   filteredcp: Observable<cpBasico[]>;
+
 
 
   mostrarProvincia = false;
@@ -52,12 +64,27 @@ export class AddComponent {
     private gruposService: GruposService,
     private tiposService: TiposService,
     private ubicacionService: UbicacionService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private fiestasService: FiestasService
   ) {
     this.routeActive = routeActive;
+
+  }
+
+  ngOnInit() {
+/*     this.AddForm = this.fb.group({
+      fecha: ['', Validators.required],
+      hora: null,
+      grupo: ['', Validators.required],
+      tipo: ['', Validators.required],
+      comunidad: ['', Validators.required],
+      provincia: ['', Validators.required],
+      poblacion: ['', Validators.required],
+      cp: ['', Validators.required],
+    }); */
     this.filteredGroup = combineLatest(
       this.gruposService.getGruposBasico(),
-      this.ControlGroup.valueChanges.pipe(startWith(''))
+      this.FiestaForm.controls.ControlGroup.valueChanges.pipe(startWith(''))
     ).pipe(
       map(([grupo, filterString]) =>
         grupo.filter(
@@ -69,7 +96,7 @@ export class AddComponent {
     );
     this.filteredTipos = combineLatest(
       this.tiposService.getTiposBasico(),
-      this.ControlTipo.valueChanges.pipe(startWith(''))
+      this.FiestaForm.controls.ControlTipo.valueChanges.pipe(startWith(''))
     ).pipe(
       map(([grupo, filterString]) =>
         grupo.filter(
@@ -81,7 +108,7 @@ export class AddComponent {
     );
     this.filteredComunidad = combineLatest(
       this.ubicacionService.getComunidades(),
-      this.ControlComunidad.valueChanges.pipe(startWith(''))
+      this.FiestaForm.controls.ControlComunidad.valueChanges.pipe(startWith(''))
     ).pipe(
       map(([grupo, filterString]) =>
         grupo.filter(
@@ -91,8 +118,6 @@ export class AddComponent {
       )
     );
   }
-
-  ngOnInit() {}
 
   caseDown(cad: string) {
     if (typeof cad === 'string') {
@@ -123,7 +148,7 @@ export class AddComponent {
     this.mostrarProvincia = true;
     this.filteredProvincia = combineLatest(
       this.ubicacionService.getProvicias(option.id),
-      this.ControlProvincia.valueChanges.pipe(startWith(''))
+      this.FiestaForm.controls.ControlProvincia.valueChanges.pipe(startWith(''))
     ).pipe(
       map(([grupo, filterString]) =>
         grupo.filter(
@@ -138,7 +163,7 @@ export class AddComponent {
     this.mostrarPoblacion = true;
     this.filteredPoblacion = combineLatest(
       this.ubicacionService.getPoblaciones(option.id),
-      this.ControlPoblacion.valueChanges.pipe(startWith(''))
+      this.FiestaForm.controls.ControlPoblacion.valueChanges.pipe(startWith(''))
     ).pipe(
       map(([grupo, filterString]) =>
         grupo.filter(
@@ -150,11 +175,11 @@ export class AddComponent {
   }
 
   cargarCP(option){
-    this.mostrarcp=true;
-    var resp=this.ubicacionService.getCP(option.id);
+    this.mostrarcp = true;
+    let resp = this.ubicacionService.getCP(option.id);
     this.filteredcp = combineLatest(
       resp,
-      this.Controlcp.valueChanges.pipe(startWith(''))
+      this.FiestaForm.controls.ControlCp.valueChanges.pipe(startWith(''))
     ).pipe(
       map(([grupo, filterString]) =>
         grupo.filter(
@@ -171,6 +196,40 @@ export class AddComponent {
   } */
 
   onSubmit() {
+    // this.fiestasService.addFiesta(this.AddForm.value)
     alert('Thanks!');
+    console.log(this.FiestaForm.value);
+    const values = this.FiestaForm.value;
+    console.log(this.FiestaForm.controls.ControlFecha.value);
+/*     console.log(this.FiestaForm.controls.ControlHora.value);
+    console.log(this.FiestaForm.controls.ControlGroup.value.id);
+    console.log(this.FiestaForm.controls.ControlTipo.value.id);
+    console.log(this.FiestaForm.controls.ControlComunidad.value.id);
+    console.log(this.FiestaForm.controls.ControlProvincia.value.id);
+    console.log(this.FiestaForm.controls.ControlPoblacion.value.id);
+    console.log(this.FiestaForm.controls.ControlCp.value.id); */
+
+    const df = new Date(this.FiestaForm.controls.ControlFecha.value);
+    console.log(df);
+    df.setHours(this.FiestaForm.controls.ControlHora.value.substring(0, 2));
+    df.setMinutes(this.FiestaForm.controls.ControlHora.value.substring(5, 3));
+
+    console.log(df);
+    this.fiestasService.addFiesta(
+      df
+      , this.FiestaForm.controls.ControlGroup.value.id
+      , this.FiestaForm.controls.ControlTipo.value.id
+      , this.FiestaForm.controls.ControlCp.value.id
+      )
+      .subscribe(
+        data => {
+          console.log(data);
+          console.log('ok');
+        },
+        error => {
+          console.log(error);
+
+        });
+    // this.fiestasService.addFiesta(new Date(year: this.AddForm.controls.date.value))
   }
 }

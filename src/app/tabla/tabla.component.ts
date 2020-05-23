@@ -101,7 +101,7 @@ export class TablaComponent implements OnInit {
   }
 
   public create(){
-    const url = `/crear/${this.dato}`;
+    const url = `/add/${this.dato}`;
 
     this.router.navigate([url]);
   }

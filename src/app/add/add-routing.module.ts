@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AddComponent } from './add.component';
 
-const routes: Routes = [{ path: ':tipo', component: AddComponent }];
+const routes: Routes = [{ path: ':tipo', component: AddComponent  }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

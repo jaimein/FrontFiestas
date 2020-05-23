@@ -1,4 +1,4 @@
-<form [formGroup]="AddForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="FiestaForm" (ngSubmit)="onSubmit()">
     <mat-card class="form-card">
         <mat-card-header>
             <mat-card-title>Añadir fiesta</mat-card-title>
@@ -8,7 +8,7 @@
                 <div class="col">
                     <mat-form-field class="full-width">
                         <mat-label>Fecha del evento</mat-label>
-                        <input matInput [matDatepicker]="pickerfecha" formControlName="date">
+                        <input matInput [matDatepicker]="pickerfecha" formControlName="ControlFecha">
                         <mat-datepicker-toggle matSuffix [for]="pickerfecha"></mat-datepicker-toggle>
                         <mat-datepicker #pickerfecha></mat-datepicker>
                     </mat-form-field>
@@ -16,7 +16,7 @@
                 <div class="col">
                     <mat-form-field class="full-width">
                         <mat-label>Hora del evento</mat-label>
-                        <input matInput id="appt-time" type="time" name="appt-time" [ngxTimepicker]="fullTime" [format]="24">
+                        <input matInput id="appt-time" type="time" formControlName="ControlHora" name="hora" [ngxTimepicker]="fullTime" [format]="24">
                         <ngx-material-timepicker #fullTime></ngx-material-timepicker>
                     </mat-form-field>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="col">
                     <mat-form-field class="full-width">
                         <mat-label>Grupo</mat-label>
-                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlGroup" [matAutocomplete]="auto">
+                        <input matInput type="text" placeholder="Selecione uno" name="grupo" formControlName="ControlGroup" [matAutocomplete]="auto">
                         <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="getDescription">
                             <mat-option *ngFor="let option of filteredGroup | async" [value]="option">
                                 {{option.descripcion}}
@@ -36,7 +36,7 @@
                 <div class="col">
                     <mat-form-field class="full-width">
                         <mat-label>Tipo</mat-label>
-                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlTipo" [matAutocomplete]="autoTipos">
+                        <input matInput type="text" placeholder="Selecione uno" name="tipo" formControlName="ControlTipo" [matAutocomplete]="autoTipos">
                         <mat-autocomplete #autoTipos="matAutocomplete" autoActiveFirstOption [displayWith]="getDescription">
                             <mat-option *ngFor="let optionTipo of filteredTipos | async" [value]="optionTipo">
                                 {{optionTipo.descripcion}}
@@ -49,7 +49,7 @@
                 <div class="col">
                     <mat-form-field class="full-width">
                         <mat-label>Comunidad</mat-label>
-                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlComunidad" [matAutocomplete]="autoComunidad">
+                        <input matInput type="text" placeholder="Selecione uno" name="comunidad" formControlName="ControlComunidad" [matAutocomplete]="autoComunidad">
                         <mat-autocomplete #autoComunidad="matAutocomplete" autoActiveFirstOption [displayWith]="getNombre">
                             <mat-option *ngFor="let optionComunidad of filteredComunidad | async" (onSelectionChange)="cargarProvincias(optionComunidad)" [value]="optionComunidad">
                                 {{optionComunidad.nombre}}
@@ -60,7 +60,7 @@
                 <div class="col" *ngIf="mostrarProvincia">
                     <mat-form-field class="full-width">
                         <mat-label>Provincia</mat-label>
-                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlProvincia" [matAutocomplete]="autoProvincia">
+                        <input matInput type="text" placeholder="Selecione uno" name="provincia" formControlName="ControlProvincia" [matAutocomplete]="autoProvincia">
                         <mat-autocomplete #autoProvincia="matAutocomplete" autoActiveFirstOption [displayWith]="getNombre">
                             <mat-option *ngFor="let optionProvincia of filteredProvincia | async" (onSelectionChange)="cargarPoblaciones(optionProvincia)" [value]="optionProvincia">
                                 {{optionProvincia.nombre}}
@@ -71,7 +71,7 @@
                 <div class="col" *ngIf="mostrarPoblacion">
                     <mat-form-field class="full-width">
                         <mat-label>Poblacion</mat-label>
-                        <input matInput type="text" placeholder="Selecione uno" [formControl]="ControlPoblacion" [matAutocomplete]="autoPoblacion">
+                        <input matInput type="text" placeholder="Selecione uno" name="poblacion" formControlName="ControlPoblacion" [matAutocomplete]="autoPoblacion">
                         <mat-autocomplete #autoPoblacion="matAutocomplete" autoActiveFirstOption [displayWith]="getNombre">
                             <mat-option *ngFor="let optionPoblacion of filteredPoblacion | async" (onSelectionChange)="cargarCP(optionPoblacion)" [value]="optionPoblacion">
                                 {{optionPoblacion.nombre}}
@@ -82,7 +82,7 @@
                 <div class="col" *ngIf="mostrarcp">
                     <mat-form-field class="full-width">
                         <mat-label>Codigo Postal</mat-label>
-                        <input matInput type="text" placeholder="Selecione uno" [formControl]="Controlcp" [matAutocomplete]="autocp">
+                        <input matInput type="text" placeholder="Selecione uno" name="cp" formControlName="ControlCp" [matAutocomplete]="autocp">
                         <mat-autocomplete #autocp="matAutocomplete" autoActiveFirstOption [displayWith]="getCalle">
                             <mat-option *ngFor="let optioncp of filteredcp | async" [value]="optioncp">
                                 {{optioncp.calle}}

@@ -32,7 +32,7 @@ const routes: Routes = [
     component: DetailsComponent
   },
   { path: 'tabla', loadChildren: () => import('./tabla/tabla.module').then(m => m.TablaModule) },
-  { path: 'add', loadChildren: () => import('./add/add.module').then(m => m.AddModule) }
+  { path: 'add', loadChildren: () => import('./add/add.module').then(m => m.AddModule), canActivate: [AuthGuard] }
 
 ];
 
