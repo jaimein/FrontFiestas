@@ -11,6 +11,7 @@ import { TipoBasico } from '../models/tipo.model';
 import { UbicacionService } from '../services/ubicacion.service';
 import { comunidadesBasico, provinciaBasico, poblacionBasico, cpBasico } from '../models/ubicacion.model';
 import { FiestasService } from '../services/fiestas.service';
+import { Fiestatotal } from '../models/fiestas.model';
 
 @Component({
   selector: 'app-add',
@@ -19,7 +20,8 @@ import { FiestasService } from '../services/fiestas.service';
 })
 export class AddComponent {
   AddForm: FormGroup;
-
+  tipo = 'fiestas';
+  id: number;
   FiestaForm = new FormGroup({
     ControlFecha: new FormControl(''),
     ControlHora: new FormControl(''),
@@ -68,20 +70,78 @@ export class AddComponent {
     private fiestasService: FiestasService
   ) {
     this.routeActive = routeActive;
+    this.routeActive.params.subscribe((params) => {
+      this.tipo = params.tipo;
+      this.id = params.id;
+      console.log(this.tipo + this.id);
+      this.cargarDatos(this.tipo);
+    });  }
+
+  ngOnInit() {
+    this.FiestaForm = this.fb.group({
+      ControlFecha: ['', Validators.required],
+      ControlHora: null,
+      ControlGroup: ['', Validators.required],
+      ControlTipo: ['', Validators.required],
+      ControlComunidad: ['', Validators.required],
+      ControlProvincia: ['', Validators.required],
+      ControlPoblacion: ['', Validators.required],
+      ControlCp: ['', Validators.required],
+    });
 
   }
 
-  ngOnInit() {
-/*     this.AddForm = this.fb.group({
-      fecha: ['', Validators.required],
-      hora: null,
-      grupo: ['', Validators.required],
-      tipo: ['', Validators.required],
-      comunidad: ['', Validators.required],
-      provincia: ['', Validators.required],
-      poblacion: ['', Validators.required],
-      cp: ['', Validators.required],
-    }); */
+  cargarDatos(tipoCarga: string){
+    switch (tipoCarga) {
+      case 'fiestas':
+        if (this.id) {
+          this.cargaFiesta(this.id);
+        } else {
+          this.cargarDatosFiesta();
+        }
+        break;
+      case 'grupos':
+
+        break;
+      case 'tipos':
+
+        break;
+    }
+
+  }
+
+  cargaFiesta(num: number){
+
+    this.cargarDatosFiesta();
+    let fiesta: Fiestatotal;
+    const cargafinalizada=false;
+/*     this.fiestasService.getFiesta(this.id).pipe().subscribe(
+      (x) => {fiesta = x;
+              this.cargarForm(x);
+              console.log('asdf');
+      }); */
+  }
+
+/*   cargarForm(f: Fiestatotal) :void{
+    console.log('cargadata');
+    console.log(f);
+    this.FiestaForm.controls.ControlFecha.setValue(f.fecha);
+    const hora = f.fecha.toString().substring(14,21);
+    this.FiestaForm.controls.ControlHora.setValue(hora);
+    this.gruposService.getGrupo(f.idGrupo).pipe().subscribe((x)=>{
+      this.FiestaForm.controls.ControlGroup.setValue(x.descripcion);
+      this.FiestaForm.controls.ControlGroup.updateValueAndValidity();
+
+    });
+    this.tiposService.getTipo(f.idTipo).pipe().subscribe((x)=>{
+      this.FiestaForm.controls.ControlTipo.setValue(x.descripcion);
+    });
+
+    this.ubicacionService.getCP(f.idCodigoPostal).pipe().subscribe((x)=>{
+      this.FiestaForm.controls.ControlCp.setValue(x.calle);
+    });
+  } */
+  cargarDatosFiesta(){
     this.filteredGroup = combineLatest(
       this.gruposService.getGruposBasico(),
       this.FiestaForm.controls.ControlGroup.valueChanges.pipe(startWith(''))
@@ -189,25 +249,17 @@ export class AddComponent {
       )
     );
   }
-  /*   private _filterGroup(value: string): GrupoBasico[] {
-    const filterValue = value.toLowerCase();
 
-    return this.grupos.filter(option => option.toLowerCase().includes(filterValue));
-  } */
 
   onSubmit() {
-    // this.fiestasService.addFiesta(this.AddForm.value)
+    if (this.FiestaForm.invalid) {
+      return;
+    }
     alert('Thanks!');
     console.log(this.FiestaForm.value);
     const values = this.FiestaForm.value;
     console.log(this.FiestaForm.controls.ControlFecha.value);
-/*     console.log(this.FiestaForm.controls.ControlHora.value);
-    console.log(this.FiestaForm.controls.ControlGroup.value.id);
-    console.log(this.FiestaForm.controls.ControlTipo.value.id);
-    console.log(this.FiestaForm.controls.ControlComunidad.value.id);
-    console.log(this.FiestaForm.controls.ControlProvincia.value.id);
-    console.log(this.FiestaForm.controls.ControlPoblacion.value.id);
-    console.log(this.FiestaForm.controls.ControlCp.value.id); */
+
 
     const df = new Date(this.FiestaForm.controls.ControlFecha.value);
     console.log(df);
@@ -230,6 +282,5 @@ export class AddComponent {
           console.log(error);
 
         });
-    // this.fiestasService.addFiesta(new Date(year: this.AddForm.controls.date.value))
   }
 }

@@ -8,12 +8,15 @@ export interface FiestaNombres {
 }
 
 export interface Fiestatotal {
-  id: string;
+  id: number;
   fecha: Date;
-  nombreGrupo: string;
-  nombreTipo: string;
-  localidad: string;
-  zona: string;
+  falt: Date;
+  cusualt: string;
+  idGrupo: number;
+  idTipo: number;
+  idCodigoPostal: number;
+  fmod: Date;
+  cusumod: string;
 }
 
 export interface FiestaCreacion {

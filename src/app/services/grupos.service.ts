@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GrupoBasico } from '../models/grupo.model';
 import { environment } from 'src/environments/environment';
@@ -16,6 +16,11 @@ export class GruposService {
   getGruposBasico(): Observable<GrupoBasico[]>{
     this.url = environment.url_api + 'Grupo/obtenerGruposBasico';
     return this.http.get<GrupoBasico[]>(this.url);
+  }
+
+  public getGrupo(id: number): Observable<GrupoBasico>{
+    this.url = environment.url_api + 'Grupo/id?id='+`${id}`;
+    return this.http.get<GrupoBasico>(this.url);
   }
 
 

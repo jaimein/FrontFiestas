@@ -93,7 +93,8 @@ export class TablaComponent implements OnInit {
   }
 
   public redirectToUpdate = (id: string) => {
-
+    const url = `/add/fiestas/${id}`;
+    this.router.navigate([url]);
   }
 
   public redirectToDelete = (id: string) => {

@@ -32,10 +32,10 @@ export class UbicacionService {
     return this.http.get<poblacionBasico[]>(this.url, {params});
   }
 
-  getCP(idPoblacion: number): Observable<cpBasico[]>{
+  getCP(id: number): Observable<cpBasico[]>{
     this.url = environment.url_api + 'CodigoPostal/cpByPoblacion';
     let params = new HttpParams();
-    params = params.append('idPoblacion', idPoblacion.toString());
+    params = params.append('idPoblacion', id.toString());
     return this.http.get<cpBasico[]>(this.url, {params});
   }
 

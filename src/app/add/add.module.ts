@@ -13,10 +13,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatNativeDateModule } from '@angular/material/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { SimpleComponent } from './simple/simple.component';
 
 
 @NgModule({
-  declarations: [AddComponent],
+  declarations: [AddComponent, SimpleComponent],
   imports: [
     CommonModule,
     AddRoutingModule,

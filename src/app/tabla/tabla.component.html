@@ -25,10 +25,10 @@
           <mat-icon class="mat-18">reorder</mat-icon>
         </button>
 
-                <button mat-icon-button color="accent" *ngIf="login" (click)="redirectToDetails(elemento.id)">
+                <button mat-icon-button color="accent" *ngIf="login" (click)="redirectToUpdate(elemento.id)">
           <mat-icon class="mat-18">system_update</mat-icon>
         </button>
-                <button mat-icon-button color="warn" *ngIf="login" (click)="redirectToDetails(elemento.id)">
+                <button mat-icon-button color="warn" *ngIf="login" (click)="redirectToDelete(elemento.id)">
           <mat-icon class="mat-18">delete</mat-icon>
         </button>
 
