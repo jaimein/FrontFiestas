@@ -18,10 +18,16 @@ export class GruposService {
     return this.http.get<GrupoBasico[]>(this.url);
   }
 
-  public getGrupo(id: number): Observable<GrupoBasico>{
-    this.url = environment.url_api + 'Grupo/id?id='+`${id}`;
+  getGrupo(id: number): Observable<GrupoBasico>{
+    this.url = environment.url_api + 'Grupo/id?id=' + `${id}`;
     return this.http.get<GrupoBasico>(this.url);
   }
 
-
+  addGrupo(nom: string){
+    this.url = environment.url_api + 'Grupo/agregar';
+    const params = new HttpParams();
+    const data = {
+      nombre: nom};
+    return this.http.post<any>(this.url, data);
+  }
 }

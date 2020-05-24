@@ -14,6 +14,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatNativeDateModule } from '@angular/material/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { SimpleComponent } from './simple/simple.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import { SimpleComponent } from './simple/simple.component';
     MatDatepickerModule,
     MatAutocompleteModule,
     MatNativeDateModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    MatProgressSpinnerModule,
+
   ]
 })
 export class AddModule { }

@@ -33,6 +33,7 @@ import { LoginComponent } from './components/login/login.component';
 import { errorInterceptorProvider } from './app-auth/errors.interceptor';
 import { jwtInterceptorProvider } from './app-auth/jwt.interceptor';
 import { DetailsComponent } from './components/details/details.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -45,6 +46,7 @@ registerLocaleData(localeEs, 'es');
     TableFiestasComponent,
     LoginComponent,
     DetailsComponent,
+    RegistroComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { TablaComponent } from './tabla/tabla.component';
 import { AuthGuard } from './app-auth/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { DetailsComponent } from './components/details/details.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'details',
     component: DetailsComponent
+  },
+  {
+    path: 'registro',
+    component: RegistroComponent
   },
   { path: 'tabla', loadChildren: () => import('./tabla/tabla.module').then(m => m.TablaModule) },
   { path: 'add', loadChildren: () => import('./add/add.module').then(m => m.AddModule), canActivate: [AuthGuard] }

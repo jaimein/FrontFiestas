@@ -6,10 +6,10 @@ import { SimpleComponent } from './simple/simple.component';
 
 const routes: Routes = [
   {
-    path: 'fiesta'
+    path: 'fiestas'
   , component: AddComponent
 },  {
-  path: 'tipo'
+  path: ':tipo'
 , component: SimpleComponent
 },  {
   path: 'grupo'
