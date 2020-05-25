@@ -3,6 +3,10 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { FiestaNombres, FiestaNumeroDias } from '../../models/fiestas.model';
 import { FiestasService } from '../../services/fiestas.service';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-fiestas-proximas',
@@ -19,7 +23,7 @@ export class FiestasProximasComponent implements OnInit {
     responsive: true,
     scales: {
       xAxes: [{
-          display: true
+          display: false
       }]
   }
   };
@@ -34,20 +38,23 @@ export class FiestasProximasComponent implements OnInit {
   public lineChartPlugins = [];
   public datosFiesta: FiestaNumeroDias[];
 
-  constructor(private fiestasService: FiestasService) { }
+
+  constructor(private fiestasService: FiestasService, private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit() {
     this.fiestasService.obtenerNumeroFiestas().subscribe(x => {
-      console.log(x);
+      //console.log(x);
       this.datosFiesta = x;
       this.lineChartData[0].data = this.datosFiesta.map(m => m.count);
       this.lineChartLabels = this.datosFiesta
       .map(m => `${new Date(Date.parse(m.fecha.toString())).toDateString()}`);
-      console.log(this.lineChartLabels);
-      console.log(this.lineChartData[0].data);
+      // console.log(this.lineChartLabels);
+      //
     }
     );
   }
+
+
 
 
 /*   @Input()
