@@ -27,6 +27,7 @@ export class TablaComponent implements OnInit {
   routeActive: ActivatedRoute;
   // auth: AuthenticationService;
   login = false;
+  load = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<any>;
@@ -39,8 +40,9 @@ export class TablaComponent implements OnInit {
     private auth: AuthenticationService,
     private router: Router
   ) {
+    this.load = true;
     this.routeActive = routeActive;
-    console.log('constructor');
+    console.log(this.load);
 
   }
   ngOnInit(): void {
@@ -56,6 +58,8 @@ export class TablaComponent implements OnInit {
     this.routeActive.params.subscribe((params) => {
       this.dato = params.dato;
       this.cargar(this.dato);
+
+
     });
   }
 
@@ -84,6 +88,8 @@ export class TablaComponent implements OnInit {
       this.dataSource.data = things;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.load = false;
+      console.log(this.load);
     });
   }
 
@@ -97,8 +103,14 @@ export class TablaComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-  public redirectToDelete = (id: string) => {
+  public redirectToDelete = (id: number) => {
+    this.fiestasService.eliminarFiesta(id).subscribe(x => {
+      console.log('fiesta eliminada');
+      this.load = false;
+      this.cargar(this.dato);
+}
 
+);
   }
 
   public create(){

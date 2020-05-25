@@ -25,3 +25,8 @@ export interface FiestaCreacion {
   id_tipo: number;
   id_codigo_postal: number;
 }
+
+export interface FiestaNumeroDias{
+  fecha: Date;
+  count: number;
+}

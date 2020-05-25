@@ -13,7 +13,7 @@ export class HomeComponent {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Fiestas', cols: 1, rows: 1, img: 'https://images.unsplash.com/photo-1546148217-293f105f5e6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1417&q=80'},
+          { title: 'Fiestas', cols: 1, rows: 1,},
           { title: 'Poblaciones', cols: 1, rows: 1 },
           { title: 'Grupos', cols: 1, rows: 1 },
           { title: 'Tipos', cols: 1, rows: 1 }
@@ -21,7 +21,7 @@ export class HomeComponent {
       }
 
       return [
-        { title: 'Fiestas', cols: 2, rows: 1, img: 'https://images.unsplash.com/photo-1546148217-293f105f5e6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1417&q=80'},
+        { title: 'Fiestas', cols: 2, rows: 1, },
         { title: 'Poblaciones', cols: 1, rows: 1 },
         { title: 'Grupos', cols: 1, rows: 2 },
         { title: 'Tipos', cols: 1, rows: 1 }

@@ -34,6 +34,8 @@ import { errorInterceptorProvider } from './app-auth/errors.interceptor';
 import { jwtInterceptorProvider } from './app-auth/jwt.interceptor';
 import { DetailsComponent } from './components/details/details.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { ChartsModule } from 'ng2-charts';
+import { FiestasProximasComponent } from './components/fiestas-proximas/fiestas-proximas.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -47,6 +49,7 @@ registerLocaleData(localeEs, 'es');
     LoginComponent,
     DetailsComponent,
     RegistroComponent,
+    FiestasProximasComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ registerLocaleData(localeEs, 'es');
     MatSortModule,
     HttpClientModule,
     MatProgressSpinnerModule,
+    ChartsModule,
   ],
   providers: [FiestasService, { provide: LOCALE_ID, useValue: 'es' }, errorInterceptorProvider,    jwtInterceptorProvider,],
   bootstrap: [AppComponent],
