@@ -11,6 +11,8 @@
                 <mat-icon> list_alt</mat-icon> Grupos</a>
             <a mat-list-item [routerLink]="['/tabla/tipos']">
                 <mat-icon> list_alt</mat-icon> Tipos</a>
+            <a mat-list-item *ngIf="iu.role>1" [routerLink]="['/tabla/usuarios']">
+                <mat-icon> list_alt</mat-icon> Usuarios</a>
 
 
             <a mat-list-item [routerLink]="['/contact']">

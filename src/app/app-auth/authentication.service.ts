@@ -3,11 +3,21 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import * as jwt_decode from 'jwt-decode';
+import { User } from '../models/user.model';
+
 
 export interface ApplicationUser {
   token: string;
   username: string;
   expiresIn: Date;
+}
+
+export interface InfoUser{
+  nombre: string;
+  email: string;
+  role: number;
+  nameid: number;
 }
 
 @Injectable({
@@ -27,6 +37,16 @@ export class AuthenticationService {
   public get currentUserValue(): ApplicationUser {
     return this.currentUserSubject.value;
   }
+
+  public get InfoUser(): InfoUser {
+    if (this.currentUserValue){
+    return jwt_decode(this.currentUserValue.token);
+    } else {
+      return {nombre: 'invitado', email: '', role: 0, nameid: 0};
+    }
+
+  }
+
 
 
   login(nombre: string, password: string) {
@@ -62,6 +82,10 @@ export class AuthenticationService {
 
         return user;
       }));
+  }
+
+  obtenerUsers(): Observable<User[]>{
+    return this.http.get<User[]>(environment.url_api + 'Usuarios');
   }
 
 }

@@ -43,5 +43,29 @@
             { "id": "id", "nombre": "id", "isDate": "no" },
             { "id": "descripcion", "nombre": "Nombre", "isDate": "no" }
         ]
+    },
+    "usuarios": {
+        "type": "User",
+        "servicio": "AuthenticationService",
+        "metodo": "ObtenerUsers",
+        "displayedColumns": [
+            "usuario",
+            "email",
+            "falt",
+            "fbaj",
+            "idTipo"
+        ],
+        "columnas": [
+            { "id": "id", "nombre": "id", "isDate": "no" },
+            { "id": "usuario", "nombre": "Nombre", "isDate": "no" },
+            { "id": "password", "nombre": "Contraseña", "isDate": "no" },
+            { "id": "falt", "nombre": "Fecha Alta", "isDate": "si" },
+            { "id": "cusualt", "nombre": "Usuario Alta", "isDate": "no" },
+            { "id": "fbaj", "nombre": "Fecha Baja", "isDate": "si" },
+            { "id": "idTipo", "nombre": "Rol", "isDate": "no" },
+            { "id": "fmod", "nombre": "Fecha Modificacion", "isDate": "si" },
+            { "id": "cusumod", "nombre": "Usuario Modifica", "isDate": "no" },
+            { "id": "email", "nombre": "Email", "isDate": "no" }
+        ]
     }
 }

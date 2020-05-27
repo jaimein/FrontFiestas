@@ -78,6 +78,9 @@ export class TablaComponent implements OnInit {
       case 'tipos':
         this.var = this.tiposService.getTiposBasico();
         break;
+      case 'usuarios':
+        this.var = this.auth.obtenerUsers();
+        break;
     }
     this.var.subscribe((things) => {
       this.dataSource.data = things;
