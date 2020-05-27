@@ -10,6 +10,9 @@ import { TiposService } from '../services/tipos.service';
 import infoTabla from '../../assets/confTabla.json';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/app-auth/authentication.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../services/snackbar.service';
+
 
 @Component({
   selector: 'app-tabla',
@@ -25,7 +28,6 @@ export class TablaComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   var: any;
   routeActive: ActivatedRoute;
-  // auth: AuthenticationService;
   login = false;
   load = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,49 +40,42 @@ export class TablaComponent implements OnInit {
     private gruposService: GruposService,
     private tiposService: TiposService,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private snackbarService: SnackbarService
   ) {
     this.load = true;
     this.routeActive = routeActive;
-    console.log(this.load);
-
   }
+
   ngOnInit(): void {
-    console.log('init');
-    this.auth.currentUser.subscribe(arg => {if (arg) {
-      // console.log('login');
-      this.login = true;
-    } else {
-      this.login = false;
-      // console.log('nooooo');
-    }});
+    this.auth.currentUser.subscribe(arg => {
+      if (arg) {
+        this.login = true;
+      } else {
+        this.login = false;
+      }
+    });
 
     this.routeActive.params.subscribe((params) => {
       this.dato = params.dato;
       this.cargar(this.dato);
-
-
     });
   }
 
 
   cargar(dato: string) {
-    console.log('ejecuta fcargar' + dato);
     this.dataSource = new MatTableDataSource<any>();
     this.arrayespe = this.tabla[this.dato];
     this.displayedColumns = this.arrayespe.displayedColumns;
     this.columnas = this.arrayespe.columnas;
     switch (this.dato) {
       case 'fiestas':
-        console.log(this.dato);
         this.var = this.fiestasService.getFiestasNombres();
         break;
       case 'grupos':
-        console.log(this.dato);
         this.var = this.gruposService.getGruposBasico();
         break;
       case 'tipos':
-        console.log(this.dato);
         this.var = this.tiposService.getTiposBasico();
         break;
     }
@@ -89,8 +84,13 @@ export class TablaComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.load = false;
-      console.log(this.load);
-    });
+      this.snackbarService.success('Datos Cargados');
+    },
+      error => {
+        this.snackbarService.error('Error:' + error);
+        this.load = false;
+      }
+    );
   }
 
   public redirectToDetails = (id: string) => {
@@ -105,15 +105,18 @@ export class TablaComponent implements OnInit {
 
   public redirectToDelete = (id: number) => {
     this.fiestasService.eliminarFiesta(id).subscribe(x => {
-      console.log('fiesta eliminada');
+      this.snackbarService.success('Evento eliminado');
       this.load = false;
       this.cargar(this.dato);
-}
+    },
+      error => {
+        this.snackbarService.error('Error:' + error);
+      }
+    );
 
-);
   }
 
-  public create(){
+  public create() {
     const url = `/add/${this.dato}`;
 
     this.router.navigate([url]);

@@ -10,3 +10,15 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.error {
+    background-color: red;
+}
+
+.success {
+    background-color: green;
+}
+
+.warn {
+    background-color: orange;
+}

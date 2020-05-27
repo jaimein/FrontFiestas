@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/app-auth/authentication.service';
 import { first } from 'rxjs/operators';
+import { SnackbarService } from '../../services/snackbar.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class RegistroComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private snackbarService: SnackbarService
   ) { }
 
   ngOnInit(): void {
@@ -53,10 +55,12 @@ export class RegistroComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.snackbarService.success('Acceso Concedido');
           this.router.navigate([this.returnUrl]);
         },
         error => {
           this.error = error;
+          this.snackbarService.error('Error: ' + error);
           this.showSpinner = false;
         });
   }

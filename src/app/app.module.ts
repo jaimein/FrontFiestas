@@ -36,6 +36,8 @@ import { DetailsComponent } from './components/details/details.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ChartsModule } from 'ng2-charts';
 import { FiestasProximasComponent } from './components/fiestas-proximas/fiestas-proximas.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 registerLocaleData(localeEs, 'es');
 
@@ -74,6 +76,7 @@ registerLocaleData(localeEs, 'es');
     HttpClientModule,
     MatProgressSpinnerModule,
     ChartsModule,
+    MatSnackBarModule
   ],
   providers: [FiestasService, { provide: LOCALE_ID, useValue: 'es' }, errorInterceptorProvider,    jwtInterceptorProvider,],
   bootstrap: [AppComponent],

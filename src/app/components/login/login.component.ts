@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private snackbarService: SnackbarService
   ) { }
 
   ngOnInit() {
@@ -53,10 +55,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.snackbarService.success('Acceso Concedido');
           this.router.navigate([this.returnUrl]);
         },
         error => {
           this.error = error;
+          this.snackbarService.error('Error: ' + error);
           this.showSpinner = false;
         });
   }

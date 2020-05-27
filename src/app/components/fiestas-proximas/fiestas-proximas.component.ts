@@ -5,6 +5,7 @@ import { FiestaNombres, FiestaNumeroDias } from '../../models/fiestas.model';
 import { FiestasService } from '../../services/fiestas.service';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
+import { SnackbarService } from '../../services/snackbar.service';
 
 
 
@@ -39,17 +40,21 @@ export class FiestasProximasComponent implements OnInit {
   public datosFiesta: FiestaNumeroDias[];
 
 
-  constructor(private fiestasService: FiestasService, private breakpointObserver: BreakpointObserver) { }
+  constructor(
+    private fiestasService: FiestasService
+    , private breakpointObserver: BreakpointObserver
+    , private snackbarService: SnackbarService) { }
 
   ngOnInit() {
     this.fiestasService.obtenerNumeroFiestas().subscribe(x => {
-      //console.log(x);
       this.datosFiesta = x;
       this.lineChartData[0].data = this.datosFiesta.map(m => m.count);
       this.lineChartLabels = this.datosFiesta
       .map(m => `${new Date(Date.parse(m.fecha.toString())).toDateString()}`);
-      // console.log(this.lineChartLabels);
-      //
+      this.snackbarService.success('Graficos cargados');
+    },
+    error => {
+      this.snackbarService.error('Error: ' + error);
     }
     );
   }

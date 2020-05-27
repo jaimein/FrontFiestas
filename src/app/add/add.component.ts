@@ -12,13 +12,14 @@ import { UbicacionService } from '../services/ubicacion.service';
 import { comunidadesBasico, provinciaBasico, poblacionBasico, cpBasico } from '../models/ubicacion.model';
 import { FiestasService } from '../services/fiestas.service';
 import { Fiestatotal } from '../models/fiestas.model';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css'],
 })
-export class AddComponent {
+export class AddComponent implements OnInit {
   AddForm: FormGroup;
   tipo = 'fiestas';
   id: number;
@@ -32,12 +33,6 @@ export class AddComponent {
     ControlPoblacion: new FormControl(''),
     ControlCp: new FormControl(''),
   });
-  // ControlGroup = new FormControl();
-  // ControlTipo = new FormControl();
-  // ControlComunidad = new FormControl();
-  // ControlProvincia = new FormControl();
-  // ControlPoblacion = new FormControl();
-  // Controlcp = new FormControl();
 
   filteredGroup = new Observable<GrupoBasico[]>();
   date = new FormControl(new Date());
@@ -53,8 +48,6 @@ export class AddComponent {
   filteredPoblacion: Observable<poblacionBasico[]>;
   filteredcp: Observable<cpBasico[]>;
 
-
-
   mostrarProvincia = false;
   mostrarPoblacion = false;
   mostrarcp = false;
@@ -67,7 +60,8 @@ export class AddComponent {
     private tiposService: TiposService,
     private ubicacionService: UbicacionService,
     private auth: AuthenticationService,
-    private fiestasService: FiestasService
+    private fiestasService: FiestasService,
+    private snackbarService: SnackbarService
   ) {
     this.routeActive = routeActive;
     this.routeActive.params.subscribe((params) => {
@@ -256,17 +250,13 @@ export class AddComponent {
       return;
     }
     alert('Thanks!');
-    console.log(this.FiestaForm.value);
     const values = this.FiestaForm.value;
-    console.log(this.FiestaForm.controls.ControlFecha.value);
 
 
     const df = new Date(this.FiestaForm.controls.ControlFecha.value);
-    console.log(df);
     df.setHours(this.FiestaForm.controls.ControlHora.value.substring(0, 2));
     df.setMinutes(this.FiestaForm.controls.ControlHora.value.substring(5, 3));
 
-    console.log(df);
     this.fiestasService.addFiesta(
       df
       , this.FiestaForm.controls.ControlGroup.value.id
@@ -275,12 +265,10 @@ export class AddComponent {
       )
       .subscribe(
         data => {
-          console.log(data);
-          console.log('ok');
+          this.snackbarService.success('Fiesta añadida');
         },
         error => {
-          console.log(error);
-
+          this.snackbarService.error('Error:' + error);
         });
   }
 }
