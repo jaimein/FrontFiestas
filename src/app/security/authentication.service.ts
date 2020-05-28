@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import * as jwt_decode from 'jwt-decode';
 import { User } from '../models/user.model';
-
+import { sha256, sha224 } from 'js-sha256';
 
 export interface ApplicationUser {
   token: string;
@@ -29,7 +29,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<ApplicationUser>;
   public currentUser: Observable<ApplicationUser>;
 
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient, ) {
     this.currentUserSubject = new BehaviorSubject<ApplicationUser>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -51,6 +51,7 @@ export class AuthenticationService {
 
   login(nombre: string, password: string) {
 
+    password = sha256(password);
     return this.http.post<any>(environment.url_api + 'Auth', { nombre, password }, )
       .pipe(map(user => {
         // login successful if there's a jwt token in the response

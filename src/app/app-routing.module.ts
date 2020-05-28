@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './contact/contact.component';
-import { TableFiestasComponent } from './components/table-fiestas/table-fiestas.component';
+import { HomeComponent } from './components/home/home.component';
+import { ContactComponent } from './shared/contact/contact.component';
+import { TableFiestasComponent } from './shared/table-fiestas/table-fiestas.component';
 import { TablaComponent } from './tabla/tabla.component';
-import { AuthGuard } from './app-auth/auth.guard';
+import { AuthGuard } from './security/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { DetailsComponent } from './components/details/details.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -19,11 +19,11 @@ const routes: Routes = [
     path: 'contact',
     component: ContactComponent
   },
-  {
+/*   {
     path: 'fiestas',
     component: TableFiestasComponent,
     //canActivate: [AuthGuard]
-  },
+  }, */
   {
     path: 'login',
     component: LoginComponent

@@ -1,4 +1,12 @@
-<div style="display: block;width: 100%; height: 75%;" id="padre">
+<div>
     <canvas baseChart id="graf" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
   </canvas>
 </div>
+
+<script>
+    function ajustarTamano() {
+        var can = document.getElementById("graf");
+        console.log(can.clientWidth);
+        console.log(can.clientHeight);
+    }
+</script>

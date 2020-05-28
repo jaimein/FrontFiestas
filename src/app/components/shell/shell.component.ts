@@ -3,8 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { AuthenticationService, InfoUser } from 'src/app/app-auth/authentication.service';
-import { SnackbarService } from '../services/snackbar.service';
+import { AuthenticationService, InfoUser } from 'src/app/security/authentication.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-shell',

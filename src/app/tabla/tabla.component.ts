@@ -9,7 +9,7 @@ import { GruposService } from '../services/grupos.service';
 import { TiposService } from '../services/tipos.service';
 import infoTabla from '../../assets/confTabla.json';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/app-auth/authentication.service';
+import { AuthenticationService } from 'src/app/security/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarService } from '../services/snackbar.service';
 

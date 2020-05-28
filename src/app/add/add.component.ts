@@ -4,7 +4,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { GrupoBasico } from '../models/grupo.model';
 import { GruposService } from '../services/grupos.service';
 import { TiposService } from '../services/tipos.service';
-import { AuthenticationService } from '../app-auth/authentication.service';
+import { AuthenticationService } from '../security/authentication.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, startWith, subscribeOn } from 'rxjs/operators';
 import { TipoBasico } from '../models/tipo.model';
