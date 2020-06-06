@@ -82,7 +82,7 @@ export class AddComponent implements OnInit {
       ControlPoblacion: ['', Validators.required],
       ControlCp: ['', Validators.required],
     });
-
+    this.cargarDatosFiesta();
   }
 
   cargarDatos(tipoCarga: string){

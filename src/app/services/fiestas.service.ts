@@ -24,7 +24,6 @@ export class FiestasService {
 
   getFiestasNombres(): Observable<FiestaNombres[]>{
     this.url = environment.url_api + 'Fiesta/obtenerFiestasSimple';
-    // console.log(this.url);
     return this.http.get<FiestaNombres[]>(this.url);
   }
 

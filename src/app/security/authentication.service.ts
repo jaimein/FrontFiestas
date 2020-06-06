@@ -44,7 +44,6 @@ export class AuthenticationService {
     } else {
       return {nombre: 'invitado', email: '', role: 0, nameid: 0};
     }
-
   }
 
 

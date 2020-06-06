@@ -54,5 +54,7 @@ export class ShellComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+    location.reload(true);
+
   }
 }
